@@ -1,0 +1,5 @@
+make conmtrols of bird better
+    The bird shouldnt move that fast
+    and the camera should tern where the bird is
+Plane 
+    It should start opposite to a bird and toward her

@@ -1,4 +1,3 @@
-from sklearn.preprocessing import scale
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 
@@ -9,11 +8,11 @@ Sky()
 
 class Plane(Entity):
     def __init__(self):
-        super().__init__(model='assets/plane', scale=0.001)
-        self.texture = '11803_Airplane_body_diff.jpg'
-        self.texture = '11803_Airplane_wing_big_L_diff.jpg'
-        self.texture = '11803_Airplane_wing_big_R_diff.jpg'
-        self.texture = '11803_Airplane_wing_big_R_diff.jpg'
+        super().__init__(model='assets/plane2')
+        self.texture = 'plane/Diffuse'
+
+    def update(self):
+        pass
 
 
 class Bird(Entity):
@@ -26,15 +25,19 @@ class Bird(Entity):
     def update(self):
         self.y -= 0.001
         if held_keys['d']:
-            self.x += time.dt/10
+            self.x += time.dt/100
+            self.rotation_z += 0.2
             camera.rotation_y += 10 * time.dt
         if held_keys['a']:
-            self.x -= time.dt/10
+            self.x -= time.dt/100
+            self.rotation_z -= 0.2
             camera.rotation_y -= 10 * time.dt
         if held_keys['w']:
             self.z += time.dt
+            camera.z += time.dt 
         if held_keys['s']:
             self.z -= time.dt
+            camera.z -= time.dt 
         if held_keys['space']:
             self.y += time.dt/2
 
