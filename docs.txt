@@ -3,3 +3,5 @@ make conmtrols of bird better
     and the camera should tern where the bird is
 Plane 
     It should start opposite to a bird and toward her
+Add points
+Texture for a Sun
