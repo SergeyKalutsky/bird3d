@@ -1,7 +1,13 @@
-make conmtrols of bird better
-    The bird shouldnt move that fast
-    and the camera should tern where the bird is
-Plane 
-    It should start opposite to a bird and toward her
-Add points
-Texture for a Sun
+find different texture for the background 
+And they have look good
+
+
+Levels
+Need a differen background
+Add different enemies
+    Birds
+    Litter
+    
+Levels wont have a distinct change
+
+Difficulty
