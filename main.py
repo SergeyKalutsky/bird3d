@@ -2,7 +2,8 @@ import time
 from ursina import *
 from random import uniform
 
-app = Ursina()
+if __name__ == '__main__':
+    app = Ursina()
 go = False
 
 class Plane(Entity):
@@ -47,6 +48,8 @@ class Bird(Entity):
             go = True
             Text(text='GAME OVER', y=0, x=0, scale=1.5,
              origin=(0, 0), background=True)
+            for game_object in game_objects:
+                 game_object.enabled = False
         if not go:
             if held_keys['d']:
                 self.x += time.dt
@@ -69,14 +72,17 @@ class Bird(Entity):
             camera.y -= 0.02
 
 
-#sphere = Entity(model="sphere", color=color.yellow, position=(10, 5, 5))
+game_objects = []
 bird = Bird()
+game_objects.append(bird)
 for i in range(5):
-    Plane(origin=(uniform(-6, 6), uniform(-20, 20)), speed=1)
+    game_objects.append(Plane(origin=(uniform(-6, 6), uniform(-20, 20), 50), speed=1))
 
 score = Text(text='0', y=.43, x=-.75, scale=1.5,
              origin=(0, 0), background=True)
+game_objects.append(score)
+game_objects.append(Sky(texture='surroundings/wp2894323.jpg'))
 
-Sky(texture='surroundings/wp2894323.jpg')
 
-app.run()
+if __name__ == '__main__':
+    app.run()
