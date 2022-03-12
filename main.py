@@ -1,4 +1,3 @@
-import time
 from ursina import *
 from random import uniform
 
@@ -13,19 +12,25 @@ class Plane(Entity):
         self.rotation_y = 180
         self.rotation_x += 7
         self.speed = speed
+        self.elapsed_time = 0
 
     def update(self):
+        self.elapsed_time += time.dt
         global go
         if not go:
+            if self.elapsed_time >= 5:
+                self.speed += 1
+                self.elapsed_time = 0
+                print(self.speed)
             self.z -= self.speed
             if bird.x > self.x:
-                self.x += 0.1
+                self.x += 0.2
             else:
-                self.x -= 0.1
+                self.x -= 0.2
             if bird.y > self.y:
-                self.y += 0.1
+                self.y += 0.2
             else:
-                self.y -= 0.1
+                self.y -= 0.2
             if self.z <= -150:
                 score.text = str(int(score.text) + 1)
                 self.z = 100
@@ -75,7 +80,7 @@ class Bird(Entity):
 game_objects = []
 bird = Bird()
 game_objects.append(bird)
-for i in range(5):
+for i in range(10):
     game_objects.append(Plane(origin=(uniform(-6, 6), uniform(-20, 20), 50), speed=1))
 
 score = Text(text='0', y=.43, x=-.75, scale=1.5,

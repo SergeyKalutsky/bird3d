@@ -1,13 +1,1 @@
-find different texture for the background 
-And they have look good
-
-
-Levels
-Need a differen background
-Add different enemies
-    Birds
-    Litter
-    
-Levels wont have a distinct change
-
-Difficulty
+Try to make go back button
