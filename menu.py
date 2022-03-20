@@ -40,11 +40,6 @@ for i, e in enumerate(main_menu.buttons):
     e.y = (-i-2) * button_spacing
 
 
-# # load menu content
-# for i in range(3):
-#     MenuButton(parent=load_menu,
-#                text=f'Empty Slot {i}', y=-i * button_spacing, on_click=start_game)
-
 load_menu.back_button = MenuButton(parent=load_menu, text='back', y=(
     (-i-2) * button_spacing), on_click=Func(setattr, state_handler, 'state', 'main_menu'))
 
