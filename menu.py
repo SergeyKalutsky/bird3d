@@ -23,11 +23,13 @@ state_handler = Animator({
     'options_menu': options_menu,
 })
 
+def start_game():
+    menu_parent.enabled = False
+    import main
 
 # main menu content
 main_menu.buttons = [
-    MenuButton('start', on_click=Func(
-        setattr, state_handler, 'state', 'load_menu')),
+    MenuButton('start', on_click=start_game),
     MenuButton('options', on_click=Func(
         setattr, state_handler, 'state', 'options_menu')),
     MenuButton('quit', on_click=Sequence(Wait(.01), Func(sys.exit))),
@@ -38,15 +40,10 @@ for i, e in enumerate(main_menu.buttons):
     e.y = (-i-2) * button_spacing
 
 
-def start_game():
-    menu_parent.enabled = False
-    import main
-
-
-# load menu content
-for i in range(3):
-    MenuButton(parent=load_menu,
-               text=f'Empty Slot {i}', y=-i * button_spacing, on_click=start_game)
+# # load menu content
+# for i in range(3):
+#     MenuButton(parent=load_menu,
+#                text=f'Empty Slot {i}', y=-i * button_spacing, on_click=start_game)
 
 load_menu.back_button = MenuButton(parent=load_menu, text='back', y=(
     (-i-2) * button_spacing), on_click=Func(setattr, state_handler, 'state', 'main_menu'))
