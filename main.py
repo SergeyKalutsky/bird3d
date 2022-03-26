@@ -1,6 +1,6 @@
-from turtle import onclick
 from ursina import *
 from random import uniform
+
 
 if __name__ == '__main__':
     app = Ursina()
@@ -30,19 +30,18 @@ class Plane(Entity):
         global go
         if not go:
             if self.elapsed_time >= 5:
-                self.speed += 1
+                self.speed += 0.2
                 self.elapsed_time = 0
             self.z -= self.speed
             if bird.x > self.x:
-                self.x += 0.2
+                self.x += 0.05
             else:
-                self.x -= 0.2
+                self.x -= 0.05
             if bird.y > self.y:
-                self.y += 0.2
+                self.y += 0.05
             else:
-                self.y -= 0.2
+                self.y -= 0.05
             if self.z <= -150:
-                score.text = str(int(score.text) + 1)
                 self.z = 100
                 self.x = uniform(-6, 6)
                 self.y = uniform(-20, 20)
@@ -54,14 +53,16 @@ class Bird(Entity):
                          parent=camera, scale=16, collider='box')
         self.texture = 'HUMBIRD.JPG'
         self.texture = 'HUMBIRD.TIF'
+        self.elapsed_time = 0 
 
     def update(self):
         global go, game_object
+        self.elapsed_time += time.dt
+        score.text = str(int(self.elapsed_time))
         info = self.intersects()
         if info.hit:
             go = True
             for game_object in game_objects:
-                print(game_object.name)
                 if game_object.name == 'return_button':
                     game_object.enabled = True
                 else:
@@ -94,6 +95,7 @@ def restart():
     for game_object in game_objects:
         if game_object.name == 'bird':
             game_object.enabled = True
+            game_object.elapsed_time = 0
         if game_object.name == 'sky':
             game_object.enabled = True
         if game_object.name == 'plane':
@@ -101,6 +103,7 @@ def restart():
             game_object.x = uniform(-6, 6)
             game_object.y = uniform(-20, 20)
             game_object.enabled = True
+            game_object.speed = 1
         if game_object.name == 'text':
             game_object.text = '0'
             game_object.enabled = True
@@ -110,13 +113,10 @@ def restart():
 
 game_objects = []
 bird = Bird()
-print(dir(bird))
-print(bird.name)
 game_objects.append(bird)
 for i in range(5):
     game_objects.append(
         Plane(origin=(uniform(-6, 6), uniform(-20, 20), 50), speed=1))
-
 score = Text(text='0', y=.43, x=-.75, scale=1.5,
              origin=(0, 0), background=True)
 game_objects.append(score)
